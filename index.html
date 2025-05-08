@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tin tức ô tô mới nhất</title>
-  <meta http-equiv="refresh" content="600">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -97,10 +96,10 @@
     async function fetchNews() {
       const container = document.getElementById('news-container');
       try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbyDFTx4NL__X_GKzESVCfn7JokFfuMOAhJ543MYIulXib2krv7uYKPD9GFk9i_R1BytqA/exec');
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyKxMhc7uiW8gyWOilS-BB9SyguZq-QEluBgCh3Awm-TQol4vA6j9547D-vwo758Zee/exec');
         const data = await response.json();
 
-        container.innerHTML = '';
+        container.innerHTML = ''; // Xóa nội dung cũ trước khi thêm tin mới
         data.articles.forEach(article => {
           const newsDiv = document.createElement('div');
           newsDiv.classList.add('news-item');
@@ -116,7 +115,10 @@
       }
     }
 
+    // Gọi hàm fetchNews để tải tin tức ngay khi trang web được mở
     fetchNews();
+
+    // Cập nhật tin tức mỗi phút một lần
     setInterval(fetchNews, 1 * 60 * 1000);
   </script>
 </body>
