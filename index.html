@@ -2,35 +2,96 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tin tức ô tô mới nhất</title>
   <meta http-equiv="refresh" content="600">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #f0f2f5;
+      color: #333;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: auto;
       padding: 20px;
-      background: #f4f4f4;
     }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      color: #222;
+      margin-bottom: 30px;
+    }
+
     #news-container {
-      background: white;
-      border-radius: 8px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
     .news-item {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
     }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
     .news-item h3 {
-      color: #2c3e50;
+      font-size: 1.2rem;
+      margin: 0 0 5px;
+      color: #0077cc;
     }
+
     .news-item a {
       text-decoration: none;
-      color: #2980b9;
+      color: inherit;
+    }
+
+    .news-item p {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .news-item h3 {
+        font-size: 1rem;
+      }
+
+      .news-item p {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 10px;
+      }
+
+      #news-container {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Tin tức cập nhật mỗi 5 phút</h1>
-  <div id="news-container">Đang tải tin...</div>
+  <div class="container">
+    <h1>Tin tức ô tô</h1>
+    <div id="news-container">Đang tải tin...</div>
+  </div>
 
   <script>
     async function fetchNews() {
@@ -44,19 +105,19 @@
           const newsDiv = document.createElement('div');
           newsDiv.classList.add('news-item');
           newsDiv.innerHTML = `
-            <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+            <h3><a href="${article.link}" target="_blank" rel="noopener">${article.title}</a></h3>
             <p>${article.summary}</p>
           `;
           container.appendChild(newsDiv);
         });
       } catch (error) {
-        container.innerHTML = 'Lỗi khi tải tin tức.';
+        container.innerHTML = '<p style="color: red;">Lỗi khi tải tin tức.</p>';
         console.error('Fetch error:', error);
       }
     }
 
     fetchNews();
-    setInterval(fetchNews, 5 * 60 * 1000); // mỗi 5 phút
+    setInterval(fetchNews, 1 * 60 * 1000);
   </script>
 </body>
 </html>
